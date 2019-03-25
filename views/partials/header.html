@@ -1,0 +1,46 @@
+<!-- MTI CONFIDENTIAL INFORMATION  -->
+
+<!-- HEADER -->
+    <header class="header fixed">
+        <div class="container">
+            <div class="header-wrapper">
+
+            <!-- Logo -->
+            <!-- Mod by Roy for change Copyright and logo from MTI to SensX, 2019-03-21. -->
+            <div class="logo col-md-3">
+                <a href="/" class="scroll-to">
+                    <!-- <img class="scroll-to" style="width: 35px; margin-top: -5px" src="public/images/mti_link_budget_logo.png">MTI RIOT II Reader -->
+                    <img class="scroll-to" style="width:100%" src="public/images/sensXLogo1.png">
+                </a>
+            </div>
+            <!-- End by Roy for change Copyright and logo from MTI to SensX, 2019-03-21. -->
+            <!-- /Logo -->
+
+            <!-- Navigation -->
+            <nav class="navigation closed">
+                <a href="#" class="menu-toggle btn"><b class="fa fa-bars"></b></a>
+                <ul class="sf-menu nav">
+                    <% for(var i=0; i<menus.length; i++) {%>
+                        <li><a href="<%= menus[i].href %>" data-i18n="menu.<%= menus[i].href %>"></a></li>
+                    <% } %>
+                </ul>
+            </nav>
+            <!-- /Navigation -->
+
+            </div>
+        </div>
+
+    </header>
+    <!-- /HEADER -->
+
+<script>
+    //for Navbar
+    jQuery(document).ready(function () {
+       theme.init();
+    });
+    //for socket
+    var socket = io().connect('http://' + location.host, {
+        'force new connection': true
+    });
+
+</script>

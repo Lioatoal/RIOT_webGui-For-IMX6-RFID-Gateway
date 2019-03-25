@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ../partials/head.html %>
+    <style type="text/CSS">
+        span {
+            font-size: 20px;
+        }
+		<!-- Add by Roy for align the display for antenna table, 2018-04-11.-->
+        input[type=checkbox]{
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom:0;
+            right:0;
+            margin: auto;
+        }
+		<!-- End by Roy for align the display for antenna table, 2018-04-11.-->
+        .enalbeInput{
+            background: #ffffff;
+        }
+        .disableInput {
+            background: #aaaaaa;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div id="header">
+            <% include ../partials/header.html %>
+        </div>
+    </div>
+
+    <div class="hidden-sm hidden-xs" style="padding-top:160px">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <span><strong data-i18n="antenna.singularisation"></strong></span></div>
+                <div class="col-md-2">
+                    <span class="text-right">Profile ID</span></div>
+                <div class="col-md-2">
+                    <select id="profile" style="width:100%;" v-model="profile">
+                    </select>
+                </div>
+            </div>
+            <hr style="background-color:#eee;height:2px;">
+            <div class="row">
+                <div class="col-md-12">
+                    <span><strong data-i18n="antenna.algorithm"></strong></span></div>
+            </div>
+            <div id="DynRow" class="row" style="background-color:#f1f1f1;">
+                <div class="col-md-2" style="height:85px;">
+                    <div class="radio" style="padding-top:10px;">
+                        <label>
+                            <input id="dynQ" type="radio">
+                            <span data-i18n="antenna.dynamicQ"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h4 data-i18n="antenna.startQ"></h4>
+                    <input type="number" id="startQ" min = "0" max = "15" style="text-align:center;width:100%;">
+                </div>
+                <div class="col-md-1">
+                    <h4 data-i18n="antenna.minQ"></h4>
+                    <input type="number" id="minQ" min = "0" max = "15" style="text-align:center;width:100%;">
+                </div>
+                <div class="col-md-1">
+                    <h4 data-i18n="antenna.maxQ"></h4>
+                    <input type="number" id="maxQ" min = "0" max = "15" style="text-align:center;width:100%;">
+                </div>
+                <div class="col-md-2">
+                    <h4 data-i18n="antenna.retryCount"></h4>
+                    <input type="number" id="dynRetry" min = "0" max = "255" style="width:100%; text-align: center;">
+                </div>
+                <div class="col-md-2">
+                    <h4 data-i18n="antenna.toggleTarget"></h4>
+                    <input type="number" id="dynToggle" min = "0" max = "1" style="width:100%; text-align: center;">
+                </div>
+                <div class="col-md-2" style="height:85px;">
+                    <h4 data-i18n="antenna.threshold"></h4>
+                    <input type="number" id="dynThreshold" min = "0" max = "255" style="width:100%; text-align: center;">
+                </div>
+            </div>
+            <div id="FixRow" class="row" style="background-color:#f1f1f1;padding-bottom:10px;">
+                <div class="col-md-2">
+                    <div class="radio" style="padding-top:10px;">
+                        <label>
+                            <input id="fixQ" type="radio" >
+                            <span data-i18n="antenna.fixedQ"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h4 data-i18n="antenna.qValue"></h4>
+                    <input type="number" id="qValue" min = "0" max = "15" style="text-align:center;width:100%;">
+                </div>
+                <div class="col-md-2">
+                    <h4 data-i18n="antenna.retryCount"></h4>
+                    <input type="number" id="fixRetry" min = "0" max = "255" style="width:100%; text-align: center;">
+                </div>
+                <div class="col-md-2">
+                    <h4 data-i18n="antenna.toggleTarget"></h4>
+                    <input type="number" id="fixToggle" min = "0" max = "1" style="width:100%; text-align: center;">
+                </div>
+                <div class="col-md-3" style="height:85px;">
+                    <h4 data-i18n="antenna.retryUntiNoTags"></h4>
+                    <input type="number" id="fixRetryN" min = "0" max = "1" style="width:100%; text-align: center;">
+                </div>
+            </div>
+            <!-- Add by Roy for add link profile field to antenna page, 2018-12-25 -->
+            <br>
+            <!-- End by Roy for add link profile field to antenna page, 2018-12-25 -->
+            <div class="row">
+                <div class="col-md-12">
+                    <span><strong data-i18n="antenna.test"></strong>  </span></div>
+            </div>
+            <div class="row" style="background-color:#f1f1f1;padding-top:10px;padding-bottom:10px;">
+                <div class=" col-md-2">
+                    <span data-i18n="antenna.mode"></span>
+                </div>
+                <div class="col-md-2">
+                    <select id="mode" class="form-control" style="text-align-last: center;">
+						<option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+						<option>5</option>
+						<option>6</option>
+						<option>7</option>
+                    </select>
+                </div>
+                <div class=" col-md-2">
+                    <span data-i18n="antenna.timeToRun"></span>
+                </div>
+                <div class="col-md-2">
+                    <input type="number" class="form-control" id="timeToRun" min = "0" max = "3600" value="0" style="width:100%; text-align: center;">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <span><strong data-i18n="antenna.selection"></strong></span></div>
+            </div>
+			<!-- Mod by Roy for align the display for antenna table, 2018-04-11.-->
+            <div class="row text-center" style="background-color:#f1f1f1;">
+                <div class="col-md-1" style="height:58px;">
+                    <h4 class="text-nowrap"  data-i18n="antenna.select"></h4>
+                </div>
+                <div class="col-md-2" style="height:58px;">
+                    <h4 class="text-center" data-i18n="antenna.logicPort"></h4>
+                </div>
+                <div class="col-md-2" style="height:58px;">
+                    <h4 data-i18n="antenna.physicalPort"></h4>
+                </div>
+                <div class="col-md-2" style="height:58px;">
+                    <h4 data-i18n="antenna.power"></h4>
+                </div>
+                <div class="col-md-2" style="height:58px;">
+                    <h4 data-i18n="antenna.dwellTime"></h4>
+                </div>
+                <div class="col-md-2" style="height:58px;">
+                    <h4 data-i18n="antenna.cycle"></h4>
+                </div>
+            </div>
+            <% for (var i = 0; i < 16; i++) {%>
+            <div class="row" style="background-color:#f1f1f1;">
+                <div class="col-md-1" style="padding-top:10px;padding-bottom:6px;">
+                    <input id="logic_<%=i%>" type="checkbox">
+                </div>
+                <div class="col-md-2">
+                    <h4 class="text-center"><%=i%></h4>
+                </div>
+                <div class="col-md-2" style="padding-top:6px;padding-bottom:6px;">
+                    <input id="physic_<%=i%>" type="number" min = "0" max = "3" style="width:100%;">
+                </div>
+                <div class="col-md-2" style="padding-top:6px;padding-bottom:6px;">
+                    <input id="power_<%=i%>" type="number" min = "0" max = "315" style="width:100%;">
+                </div>
+                <div class="col-md-2" style="padding-top:6px;padding-bottom:6px;">
+                    <input id="dwell_<%=i%>" type="number" min = "0" max = "65535" style="width:100%;">
+                </div>
+                <div class="col-md-2" style="padding-top:6px;padding-bottom:6px;">
+                    <input id="cycle_<%=i%>" type="number" min = "0" max = "8191" style="width:100%;">
+                </div>
+            </div>
+            <%}%>
+                <!-- <div class="col-md-1">
+                    <div class="row">
+                        <div class="col-md-12" style="height:58px;">
+                            <h4 class="text-nowrap">Select </h4></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-md-offset-2" style="padding-top:10px;padding-bottom:6px;">
+                            <input id="logic_0" type="checkbox">
+                        </div>
+                        <div class="col-md-12 col-md-offset-2" style="padding-top:10px;padding-bottom:6px;">
+                            <input id="logic_1" type="checkbox">
+                        </div>
+                        <div class="col-md-12 col-md-offset-2" style="padding-top:10px;padding-bottom:6px;">
+                            <input id="logic_2" type="checkbox">
+                        </div>
+                        <div class="col-md-12 col-md-offset-2" style="padding-top:10px;padding-bottom:6px;">
+                            <input id="logic_3" type="checkbox">
+                        </div>
+                        <div class="col-md-12 col-md-offset-2" style="padding-top:10px;padding-bottom:6px;">
+                            <input id="logic_4" type="checkbox">
+                        </div>
+                        <div class="col-md-12 col-md-offset-2" style="padding-top:10px;padding-bottom:6px;">
+                            <input id="logic_5" type="checkbox">
+                        </div>
+                        <div class="col-md-12 col-md-offset-2" style="padding-top:10px;padding-bottom:6px;">
+                            <input id="logic_6" type="checkbox">
+                        </div>
+                        <div class="col-md-12 col-md-offset-2" style="padding-top:10px;padding-bottom:6px;">
+                            <input id="logic_7" type="checkbox">
+                        </div>
+                        <div class="col-md-12 col-md-offset-2" style="padding-top:10px;padding-bottom:6px;">
+                            <input id="logic_8" type="checkbox">
+                        </div>
+                        <div class="col-md-12 col-md-offset-2" style="padding-top:10px;padding-bottom:6px;">
+                            <input id="logic_9" type="checkbox">
+                        </div>
+                        <div class="col-md-12 col-md-offset-2" style="padding-top:10px;padding-bottom:6px;">
+                            <input id="logic_10" type="checkbox">
+                        </div>
+                        <div class="col-md-12 col-md-offset-2" style="padding-top:10px;padding-bottom:6px;">
+                            <input id="logic_11" type="checkbox">
+                        </div>
+                        <div class="col-md-12 col-md-offset-2" style="padding-top:10px;padding-bottom:6px;">
+                            <input id="logic_12" type="checkbox">
+                        </div>
+                        <div class="col-md-12 col-md-offset-2" style="padding-top:10px;padding-bottom:6px;">
+                            <input id="logic_13" type="checkbox">
+                        </div>
+                        <div class="col-md-12 col-md-offset-2" style="padding-top:10px;padding-bottom:6px;">
+                            <input id="logic_14" type="checkbox">
+                        </div>
+                        <div class="col-md-12 col-md-offset-2" style="padding-top:10px;padding-bottom:6px;">
+                            <input id="logic_15" type="checkbox">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="row">
+                        <div class="col-md-12" style="height:58px;">
+                            <h4 class="text-center">Logical Antenna</h4></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4 class="text-center">1 </h4></div>
+                        <div class="col-md-12">
+                            <h4 class="text-center">2 </h4></div>
+                        <div class="col-md-12">
+                            <h4 class="text-center">3 </h4></div>
+                        <div class="col-md-12">
+                            <h4 class="text-center">4 </h4></div>
+                        <div class="col-md-12">
+                            <h4 class="text-center">5 </h4></div>
+                        <div class="col-md-12">
+                            <h4 class="text-center">6 </h4></div>
+                        <div class="col-md-12">
+                            <h4 class="text-center">7 </h4></div>
+                        <div class="col-md-12">
+                            <h4 class="text-center">8 </h4></div>
+                        <div class="col-md-12">
+                            <h4 class="text-center">9 </h4></div>
+                        <div class="col-md-12">
+                            <h4 class="text-center">10 </h4></div>
+                        <div class="col-md-12">
+                            <h4 class="text-center">11 </h4></div>
+                        <div class="col-md-12">
+                            <h4 class="text-center">12 </h4></div>
+                        <div class="col-md-12">
+                            <h4 class="text-center">13 </h4></div>
+                        <div class="col-md-12">
+                            <h4 class="text-center">14 </h4></div>
+                        <div class="col-md-12">
+                            <h4 class="text-center">15 </h4></div>
+                        <div class="col-md-12">
+                            <h4 class="text-center">16</h4></div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="row">
+                        <div class="col-md-12" style="height:58px;">
+                            <h4>Physical Ant.</h4></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="physic_0" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="physic_1" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="physic_2" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="physic_3" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="physic_4" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="physic_5" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="physic_6" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="physic_7" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="physic_8" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="physic_9" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="physic_10" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="physic_11" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="physic_12" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="physic_13" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="physic_14" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="physic_15" type="number" style="width:100%;">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="row">
+                        <div class="col-md-12" style="height:58px;">
+                            <h4>Power(1/10dBm)&nbsp; </h4></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="power_0" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="power_1" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="power_2" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="power_3" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="power_4" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="power_5" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="power_6" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="power_7" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="power_8" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="power_9" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="power_10" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="power_11" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="power_12" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="power_13" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="power_14" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="power_15" type="number" style="width:100%;">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="row">
+                        <div class="col-md-12" style="height:58px;">
+                            <h4>Dwell (mS)</h4></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="dwell_0" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="dwell_1" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="dwell_2" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="dwell_3" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="dwell_4" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="dwell_5" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="dwell_6" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="dwell_7" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="dwell_8" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="dwell_9" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="dwell_10" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="dwell_11" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="dwell_12" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="dwell_13" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="dwell_14" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="dwell_15" type="number" style="width:100%;">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="row">
+                        <div class="col-md-12" style="height:58px;">
+                            <h4>Inventory Rounds </h4></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="cycle_0" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="cycle_1" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="cycle_2" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="cycle_3" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="cycle_4" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="cycle_5" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="cycle_6" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="cycle_7" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="cycle_8" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="cycle_9" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="cycle_10" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="cycle_11" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="cycle_12" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="cycle_13" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="cycle_14" type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-12" style="padding-top:6px;padding-bottom:6px;">
+                            <input id="cycle_15" type="number" style="width:100%;">
+                        </div>
+                    </div>
+                </div> -->
+			<!-- End by Roy for align the display for antenna table, 2018-04-11.-->
+            </div>
+        </div>
+    </div>
+    <div class="hidden-md hidden-lg" style="padding-top:70px;">
+            <div class="container">
+                <div class="row" style="padding-bottom:10px;">
+                    <div class="col-xs-12"><span><strong data-i18n="antenna.singularisation"></strong></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4"><span>Profile ID</span></div>
+                    <div class="col-xs-6">
+                        <select id="xs-profile" class="text-left" style="width:100%;" v-model="profile">
+                        </select>
+                    </div>
+                </div>
+                <hr style="height:2px;background-color:#eeeeee;" />
+                <div class="row">
+                    <div class="col-md-12"><span><strong data-i18n="antenna.algorithm"></strong></span></div>
+                </div>
+                <div class="row" style="background-color:#eeeeee;">
+                    <div class="col-sm-6 col-xs-6">
+                        <div class="radio">
+                            <label>
+                                <input id="xs-dynQ" type="radio" />
+                                <span data-i18n="antenna.dynamicQ"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-6">
+                        <div class="radio">
+                            <label>
+                                <input id="xs-fixQ" type="radio" />
+                                <span data-i18n="antenna.fixedQ"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="xs-DynRow" style="background-color:#eeeeee;padding-bottom:10px;">
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12">
+                                <span data-i18n="antenna.startQ">Start Q</span>
+                            </div>
+                            <div class="col-sm-12 col-xs-12">
+                                <input id="xs-startQ" type="number" v-model="startQ" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-4">
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12"><span data-i18n="antenna.minQ">Min Q</span></div>
+                            <div class="col-sm-12 col-xs-12">
+                                <input id="xs-minQ" type="number" style="width:100%;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-4">
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12"><span data-i18n="antenna.maxQ">Max Q</span></div>
+                            <div class="col-sm-12 col-xs-12">
+                                <input id="xs-maxQ" type="number" style="width:100%;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12"><span data-i18n="antenna.retryCount">Retry Count</span></div>
+                            <div class="col-sm-12 col-xs-12">
+                                <input id="xs-dynRetry" type="number" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12"><span data-i18n="antenna.toggleTarget">Toggle Target</span></div>
+                            <div class="col-sm-12 col-xs-12">
+                                <input id="xs-dynToggle" type="number" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12"><span data-i18n="antenna.threshold">Threshold Multiplier</span></div>
+                            <div class="col-sm-12 col-xs-12">
+                                <input id="xs-dynThreshold" type="number" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="xs-FixRow" style="background-color:#eeeeee;padding-bottom:10px;">
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12"><span data-i18n="antenna.qValue">Q Value</span></div>
+                            <div class="col-sm-12 col-xs-12">
+                                <input id="xs-qValue" type="number" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12"><span data-i18n="antenna.retryCount">Retry Count</span></div>
+                            <div class="col-sm-12 col-xs-12">
+                                <input id="xs-fixRetry" type="number" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12"><span data-i18n="antenna.toggleTarget">Toggle Target</span></div>
+                            <div class="col-sm-12 col-xs-12">
+                                <input id="xs-fixToggle" type="number" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12"><span data-i18n="antenna.retryUntiNoTags">Retry-No Tags</span></div>
+                            <div class="col-sm-12 col-xs-12">
+                                <input id="xs-fixRetryN" type="number" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add by Roy for add link profile field to antenna page, 2018-12-25 -->
+                <!-- <div class="row" style="background-color:#f1f1f1;padding-bottom:10px;">
+                    <div class="col-sm-6 col-xs-12">
+                        <span>Link profile</span>
+                        <select id="xs-linkProfile" class="form-control" style="width: 60%;text-align-last: center;">
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>
+                    </div>
+                </div> -->
+                <!-- End by Roy for add link profile field to antenna page, 2018-12-25 -->
+                <br>
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        <span><strong data-i18n="antenna.test"></strong></span>
+                    </div>
+                </div>
+                <div class="row" style="background-color:#f1f1f1;padding-top:10px;padding-bottom:10px;">
+                    <div class="col-sm-6 col-xs-6">
+                        <div class="col-sm-12 col-xs-12">
+                            <span data-i18n="antenna.mode"></span>
+                        </div>
+                        <div class="col-sm-12 col-xs-12">
+                            <select id="xs-mode" class="form-control" style="text-align-last: center;">
+        						<option>0</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+        						<option>5</option>
+        						<option>6</option>
+        						<option>7</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-6">
+                        <div class="col-sm-12 col-xs-12">
+                            <span data-i18n="antenna.timeToRun"></span>
+                        </div>
+                        <div class="col-sm-12 col-xs-12">
+                            <input type="number" class="form-control" id="xs-timeToRun" min = "0" max = "3600" value="0" style="width:100%; text-align: center;">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row" style="padding-bottom:10px;">
+                    <div class="col-xs-12"><span><strong data-i18n="antenna.selection"></strong></span></div>
+                </div>
+                <div class="row" style="background-color:#eeeeee;padding-bottom:10px;">
+                    <div class="col-sm-2 col-xs-4">
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12 text-center"><span data-i18n="antenna.select"></span></div>
+                            <div class="col-sm-12 col-xs-12 text-center">
+                                <input id="xs-logic" type="checkbox" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-5 col-xs-12">
+                        <div class="row">
+                            <div class="col-sm-9 col-xs-12"><span data-i18n="antenna.logicPort"></span></div>
+                            <div class="col-sm-5 col-xs-7">
+                                <select id="xs-antSelect" style="width:100%;">
+                                    <option value="0" selected>1</option>
+                                    <option value="1">2</option>
+                                    <option value="2">3</option>
+                                    <option value="3">4</option>
+                                    <option value="4">5</option>
+                                    <option value="5">6</option>
+                                    <option value="6">7</option>
+                                    <option value="7">8</option>
+                                    <option value="8">9</option>
+                                    <option value="9">10</option>
+                                    <option value="10">11</option>
+                                    <option value="11">12</option>
+                                    <option value="12">13</option>
+                                    <option value="13">14</option>
+                                    <option value="14">15</option>
+                                    <option value="15">16</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12"><span data-i18n="antenna.physicalPort"></span></div>
+                            <div class="col-sm-12 col-xs-12">
+                                <input id="xs-physic" type="number" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12"><span data-i18n="antenna.power"></span></div>
+                            <div class="col-sm-12 col-xs-12">
+                                <input id="xs-power" type="number" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12"><span data-i18n="antenna.dwellTime"></span></div>
+                            <div class="col-sm-12 col-xs-12">
+                                <input id="xs-dwell" type="number" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12"><span data-i18n="antenna.cycle"></span></div>
+                            <div class="col-sm-12 col-xs-12">
+                                <input id="xs-cycle" type="number" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr style="height:2px;background-color:#eeeeee;" />
+            </div>
+        </div>
+
+    <div class="container">
+        <div class="row">
+            <div class=" col-md-offset-5 col-md-2 col-sm-offset-4 col-sm-4" style="padding-top:10px">
+                <button id="submit" class="btn btn-default" type="button" style="width:100%;font-size:18px;"><strong data-i18n="antenna.submit"></strong> </button>
+            </div>
+        </div>
+    </div>
+
+    <hr class="no-grid-gutter-h grid-gutter-margin-b">
+    <div id="footer">
+        <% include ../partials/footer.html %>
+        <!-- <footer>
+        <p class="footer section infoline_center">Copyright © 2017-2018 MTI, Inc. All Rights Reserved&nbsp;&nbsp;&nbsp;</p>
+        </footer> -->
+    </div>
+    <script type="text/javascript" src='/views/antenna/JSAntenna.js'></script>
+    <script type="text/javascript">
+    var dbSinguData = <%- JSON.stringify(singulation) %>;
+    var dbAntData =  <%- JSON.stringify(antenna) %>;
+    var dbProID = <%- JSON.stringify(profileID) %>;
+
+    getData(dbProID, dbSinguData, dbAntData);
+
+    $("#submit").click(function () {
+        setData();
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+﻿<!-- MTI CONFIDENTIAL INFORMATION  -->
+<!-- views/partials/head.html -->
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,  user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>MTI RIOT II Reader</title>
+
+<!-- node module -->
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+<!-- public css-->
+<link rel="stylesheet" type="text/css" href="public/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="public/fonts/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="public/js/jquery-ui-1.12.1/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="public/css/style.css">
+<link rel="stylesheet" type="text/css" href="public/css/catchers.css">
+<!-- public js-->
+<script type="text/javascript" src="public/js/jquery.min.js"></script>
+<script type="text/javascript" src="public/js/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+<script src="public/js/lang/i18next-1.6.3.min.js"></script> <!-- Add by Roy for add language package, 2019-02-15. -->
+<script type="text/javascript" src="public/js/theme.js" ></script>
+<!-- Add by Roy for add language package, 2019-02-15. -->
+<script>
+    var language = 'en';
+    $.get('/language', function(res){
+        if(res.Language){
+            language = res.Language;
+		}
+        i18n.init({
+            resGetPath: `public/js/lang/locales/${language}/translation.json`,
+        }, function(t) {
+            $('body').i18n();
+        });
+    })
+</script>
+<!-- End by Roy for add language package, 2019-02-15. -->

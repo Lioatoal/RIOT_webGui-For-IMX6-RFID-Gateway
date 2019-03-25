@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ../partials/head.html %>
+    <style media="screen">
+        @media screen and (min-width: 992px) {
+            .topDiv{
+                padding-top:160px;
+            }
+        }
+        @media screen and (max-width: 992px) {
+            .topDiv{
+                padding-top:70px;
+            }
+        }
+    </style>
+    <link href="public/css/RFTest.css" rel="stylesheet" type="text/css" >
+</head>
+
+<body>
+    <div>
+        <div id="header">
+            <% include ../partials/header.html %>
+        </div>
+    </div>
+
+    <div class="topDiv">
+        <div class="container">
+            <div class="row R1">
+                <div class="col-md-5 border">
+                    <h3 class="text-nowrap text-primary"><strong>Inventory</strong></h3>
+                    <div class="row">
+                        <div class="col-md-3"><span class="text-primary">EPC</span></div>
+                        <div class="col-md-5">
+                            <input type="text" id="invEPC" style="width:100%;" value="<%= invData.EPC%>">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"><span class="text-primary">TID</span></div>
+                        <div class="col-md-5">
+                            <input type="text" id="invTID" style="width:100%;" value="<%= invData.TID%>">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="checkbox-inline">
+                                <% if(fastTID.RFID_Log_FastTID) {%>
+                                <input id="invFTID" type="checkbox" checked disabled>
+                                <%}else{%>
+                                <input id="invFTID" type="checkbox" disabled>
+                                <%}%>
+                                <span class="text-warning">Fast TID</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"><span class="text-primary">Antenna</span></div>
+                        <div class="col-md-5">
+                            <input type="text" id="invAntenna" style="width:100%;" value="<%= invData.pAnt%>">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"><span class="text-primary">RSSI</span></div>
+                        <div class="col-md-5"><input type="text" id="invRSSI" style="width:100%;" value="<%= invData.avgRssi%>"></div>
+                        <div class="col-md-3"><span class="text-primary">(Average)</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"><span class="text-primary">Count</span></div>
+                        <div class="col-md-5"><input type="text" id="invCount" style="width:100%;" value="<%= invData.ReadCount%>"></div>
+                    </div>
+                </div>
+                <div class="col-md-7 border left-15px">
+                    <h3 class="text-nowrap text-primary"><strong>GPS</strong></h3>
+                    <div class="row">
+                        <div class="col-md-2"><span class="text-primary">Latitude</span></div>
+                        <div class="col-md-3">
+                            <input type="text" style="width:100%;" value="<%= GPSData.Latitude%>">
+                        </div>
+                        <div class="col-md-2 col-md-offset-1 text-right"><span class="text-primary">Speed</span></div>
+                        <div class="col-md-2">
+                            <input type="text" style="width:100%;" value="<%= GPSData.Speed%>">
+                        </div>
+                        <div class="col-md-1"><span class="text-primary">m/S</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2"><span class="text-primary">Longitude</span></div>
+                        <div class="col-md-3">
+                            <input type="text" style="width:100%;" value="<%= GPSData.Longitude%>">
+                        </div>
+                        <div class="col-md-2 col-md-offset-1 text-right"><span class="text-primary">Heading</span></div>
+                        <div class="col-md-2">
+                            <input type="text" style="width:100%;" value="<%= GPSData.Heading%>">
+                        </div>
+                        <div class="col-md-1"><span class="text-primary">Degrees</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2"><span class="text-primary">Altitude</span></div>
+                        <div class="col-md-2">
+                            <input type="text" style="width:100%;" value="<%= GPSData.Altitude%>">
+                        </div>
+                        <div class="col-md-1"><span class="text-primary">m</span></div>
+                        <div class="col-md-2 col-md-offset-1 text-right"><span class="text-primary">Sats</span></div>
+                        <div class="col-md-2">
+                            <input type="text" style="width:100%;" value="<%= GPSData.Satellites%>">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2"><span class="text-primary">DateTime</span></div>
+                        <div class="col-md-3">
+                            <input type="text" style="width:100%;" value="<%= GPSData.DateTime%>">
+                        </div>
+                        <div class="col-md-1"><span class="text-primary">UTC</span></div>
+                        <div class="col-md-2 text-right"><span class="text-primary">HDOP</span></div>
+                        <div class="col-md-2">
+                            <input type="text" style="width:100%;" value="<%= GPSData.HDOP%>">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 text-right"><span class="text-primary">Valid</span></div>
+                        <div class="col-md-3">
+                            <span><label class="checkbox-inline" style="color:rgb(255,255,255);">
+                                <% if(GPSData.Vaild) {%>
+                                <input type="checkbox" checked disabled>
+                                <%}else{%>
+                                <input type="checkbox" disabled>
+                                <%}%>
+                            </label></span>
+                        </div>
+                        <div class="col-md-2 col-md-offset-1 text-right"><span class="text-primary">Fix</span></div>
+                        <div class="col-md-2">
+                            <input type="text" style="width:100%;" value="<%= GPSData.Fix%>">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row R2">
+                <div class="col-md-4 border">
+                    <h3 class="text-nowrap text-warning"><strong>Frequency</strong></h3>
+                    <div class="row">
+                        <div class="col-md-3"><span class="text-warning">Region</span></div>
+                        <div class="col-md-5">
+                            <select id="region" class="input-sm" style="font-size:14px;width:100%">
+                                <% for(var i in regionData) {%>
+                                <option value="<%= regionData[i].BAND %>"><%= regionData[i].Region %></option>
+                                <%}%>
+                            </select>
+                        </div>
+                        <div class="col-md-3"><span class="text-warning">Country</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"><span class="text-warning">Freq.</span></div>
+                        <div class="col-md-5">
+                            <select id="freq" class="input-sm" style="font-size:14px;width:100%">
+                                <% for(var i in freqData) {%>
+                                <option value="<%= freqData[i].Frequency %>"><%= freqData[i].Frequency %></option>
+                                <%}%>
+                            </select>
+                        </div>
+                        <div class="col-md-3"><span class="text-warning">MHz</span></div>
+                    </div>
+                </div>
+                <div class="col-md-2 border left-5px">
+                    <h3 class="text-nowrap text-warning"><strong>Channel</strong></h3>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="radio-inline">
+                                <input type="radio" name="ChannelRadio" value="0" checked>
+                                <span class="text-warning">
+                                    Hopping
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="radio-inline">
+                                <input type="radio" name="ChannelRadio" value="1">
+                                <span class="text-warning">
+                                    Single Channel
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 border left-10px">
+                    <h3 class="text-nowrap text-warning"><strong>Antenna</strong></h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <select id="antPort" class="input-sm" style="font-size:14px;width:100%;">
+                                <% for(var i = 1; i<17; i++) {%>
+                                <option value="<%= i-1%>"><%= i%></option>
+                                <%}%>
+                            </select>
+                        </div>
+                        <div class="col-md-3"><span class="text-warning">Port</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input id="antPower" type="number" min=0 max=315 style="width:100%;" value="100">
+                        </div>
+                        <div class="col-md-6">
+                            <span class="text-warning">Power</span>
+                            <br>
+                            <span class="text-warning">1/10dBm</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 border left-15px">
+                    <h3 class="text-nowrap text-warning"><strong>Operation Mode</strong></h3>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="radio-inline">
+                                <input type="radio" name="OpModeRadio" checked value="0">
+                                <span class="text-warning">
+                                    Continuous
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="radio-inline">
+                                <input type="radio" name="OpModeRadio" value="1">
+                                <span class="text-warning">
+                                    Non- continuous
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 border">
+                    <h3 class="text-nowrap text-warning" style="border-bottom: 2px solid;">
+                        <strong>Modulation for ETSI</strong>
+                    </h3>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4><strong>Modulation</strong></h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <label class="radio-inline">
+                                <input type="radio" name="moduRadio" checked value="0">
+                                <span class="text-warning">Continuous</span>
+                            </label>
+                        </div>
+                        <div class="col-md-5">
+                            <label class="radio-inline">
+                                <input type="radio" name="moduRadio" value="1">
+                                <span class="text-warning">Pulsing</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"><span class="text-warning">On Time</span></div>
+                        <div class="col-md-5"><input id="onTime" type="number" style="width:100%;" value="100"></div>
+                        <div class="col-md-3"><span class="text-warning">mS</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"><span class="text-warning">Off Time</span></div>
+                        <div class="col-md-5"><input id="offTime" type="number" style="width:100%;" value="100"></div>
+                        <div class="col-md-3"><span class="text-warning">mS</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4 class="text-nowrap"><strong>Random Data Type</strong></h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <label class="radio-inline">
+                                <input type="radio" name="randomDTRadio" checked value="0">
+                                <span class="has-warning">Internal</span>
+                            </label>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="radio-inline">
+                                <input type="radio" name="randomDTRadio" value="1">
+                                <span class="has-warning">Fixed 551-bit</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 left-5px border" style="color:#8000e4;">
+                    <h3 class="text-nowrap"><strong>GPIO Loopback</strong></h3>
+                    <div class="row">
+                        <div class="col-md-3 text-right"><span>GPIO 1 =&gt;</span></div>
+                        <div class="col-md-1">
+                            <span><label class="checkbox-inline" style="color:rgb(255,255,255);">
+                                <input id="GPIO1" type="checkbox">
+                            </label></span>
+                        </div>
+                        <div class="col-md-1 text-right"><span>set</span></div>
+                        <div class="col-md-4 text-right">
+                            <span class="text-primary">=&gt; GPIO 2&nbsp;</span>
+                        </div>
+                        <div class="col-md-1">
+                            <span><label class="checkbox-inline" style="color:rgb(255,255,255);">
+                                <input id="GPIO2" type="checkbox">
+                            </label></span>
+                        </div>
+                        <div class="col-md-1 text-right"><span class="text-primary">read</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 text-right"><span>GPIO 3 =&gt;</span></div>
+                        <div class="col-md-1">
+                            <span><label class="checkbox-inline" style="color:rgb(255,255,255);">
+                                <input id="GPIO3" type="checkbox">
+                            </label></span>
+                        </div>
+                        <div class="col-md-1 text-right"><span>set</span></div>
+                        <div class="col-md-4 text-right"><span class="text-primary">=&gt; GPIO 4&nbsp;</span></div>
+                        <div class="col-md-1">
+                            <span><label class="checkbox-inline" style="color:rgb(255,255,255);">
+                                <input id="GPIO4" type="checkbox">
+                            </label></span>
+                        </div>
+                        <div class="col-md-1 text-right"><span class="text-primary">read</span></div>
+                    </div>
+                </div>
+                <div class="col-md-5 left-5px border" style="color:#8000e4;margin-top:10px;">
+                    <h3 class="text-nowrap"><strong>HP-SiP Temperature</strong></h3>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="radio-inline">
+                                <input type="radio" name="tempRadio" checked value="0"><span>PA</span>
+                            </label>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="radio-inline">
+                                <input type="radio" name="tempRadio" value="1"><span>Ambient</span>
+                            </label>
+                        </div>
+                        <div class="col-md-3">
+                            <input id="tempDeg" type="text" style="width:100%;" value="30">
+                        </div>
+                        <div class="col-md-2"><span class="text-primary">deg C</span></div>
+                    </div>
+                </div>
+                <div class="col-md-3 border left-15px" style="color:#8000e4;margin-top:-131px;">
+                    <h3 class="text-nowrap">PING Test</h3>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4 class="text-nowrap text-center"><strong>I.P. Address</strong></h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input id="ipAddress" type="text" style="width:100%;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 col-md-offset-1">
+                            <input id="ipPingCount"type="number" style="width:100%;">
+                        </div>
+                        <div class="col-md-4"><span>Count</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <button id="Ping" class="btn btn-default btn-lg" type="button" style="color:#8000e4;font-weight:bold;">Ping</button></div>
+                    </div>
+                </div>
+                <div class="col-md-8 border left-5px" style="margin-top:5px;">
+                    <div class="row">
+                        <div class="col-md-2 text-right">
+                            <h4 class="text-nowrap"><strong>Function</strong></h4>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="btn-group" role="group">
+                                <button id="invON" class="btn btn-default btn-lg" type="button">Inventory On</button>
+                                <button id="RFON" class="btn btn-default btn-lg left-5px" type="button">RF On</button>
+                                <button id="ModuON" class="btn btn-default btn-lg left-10px" type="button">Modulation On</button>
+                                <button id="UPDATEON" class="btn btn-default btn-lg left-15px" type="button">UPDATE</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 left-10px">
+                    <textarea class="input-lg border" disabled=""></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="no-grid-gutter-h grid-gutter-margin-b">
+    <div id="footer">
+        <% include ../partials/footer.html%>
+    </div>
+    <script type="text/javascript" src='/views/RFTest/JSRFTest.js'></script>
+</body>
+</html>

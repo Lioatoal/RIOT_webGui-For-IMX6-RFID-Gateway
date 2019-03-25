@@ -1,0 +1,75 @@
+.rwd-table {
+    background: #FFFFFF;
+    overflow: hidden;
+}
+.rwd-table tr:nth-of-type(2n){
+    background: #EEE;
+}
+.rwd-table th,
+.rwd-table td {
+    margin-bottom: 10px;
+}
+.rwd-table {
+    min-width: 100%;
+}
+.rwd-table th {
+    display: none;
+}
+.rwd-table td {
+    display: block;
+}
+.rwd-table td:before {
+    content: attr(data-th);
+    font-weight: bold;
+    width: 100%;
+    display: inline-block;
+}
+.rwd-table th, .rwd-table td {
+    text-align: left;
+}
+.rwd-table th, .rwd-table td:before {
+    font-weight: bold;
+}
+@media (min-width: 768px) {
+    .rwd-table td:before {
+        display: none;
+    }
+    .rwd-table th, .rwd-table td {
+        display: table-cell;
+        padding: 0.25em 0.5em;
+    }
+    .rwd-table th:first-child,
+    .rwd-table td:first-child {
+        padding-left: 0;
+    }
+    .rwd-table th:last-child,
+    .rwd-table td:last-child {
+        padding-right: 0;
+    }
+    .rwd-table th,
+    .rwd-table td {
+        padding: 1em !important;
+    }
+}
+@media screen and (min-width: 992px) {
+    .topDiv{
+        padding-top:160px;
+    }
+}
+@media screen and (max-width: 992px) {
+    .topDiv{
+        padding-top:70px;
+    }
+}
+input[type=checkbox]{
+    zoom:150%
+}
+
+.toolBar button {
+    width: 100%;
+    margin-bottom: 5px;
+}
+.toolBar input {
+    width: 100%;
+    border-radius: 20px;
+}

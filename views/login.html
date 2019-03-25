@@ -1,0 +1,76 @@
+<!-- MTI CONFIDENTIAL INFORMATION  -->
+<!-- views/login.html -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ./partials/head.html %>
+</head>
+
+<body>
+    <header class="header fixed">
+        <div class="container">
+            <div class="header-wrapper clearfix">
+                <!-- Mod by Roy for change Copyright and logo from MTI to SensX, 2019-03-21. -->
+                <div class="logo col-md-3">
+                    <a href="/" class="scroll-to">
+                        <!-- <img class="scroll-to" style="width: 35px; margin-top: -5px" src="public/images/mti_link_budget_logo.png">MTI RIOT II Reader -->
+                        <img class="scroll-to" style="width:100%" src="public/images/sensXLogo1.png">
+                    </a>
+                </div>
+                <!-- End by Roy for change Copyright and logo from MTI to SensX, 2019-03-21. -->
+            </div>
+        </div>
+    </header>
+
+    <div id="content">
+    <section class="page-section">
+        <div class="container-fluid">
+        <h1 class="c" data-i18n="login.login"></h1>
+
+        <form action="login" method="post" accept-charset="utf-8">
+            <div id="login_section" class="section">
+
+
+                <table class="infoline">
+                    <tr>
+                        <!-- <td class="infoline_column infoline_left">Username:</td> -->
+                        <td class="infoline_column" style="padding-left: 0;text-align: center;">
+                            <label style="width: 100px;" data-i18n="login.username"></label>
+                            <input type="text" size="20" maxlength="20" id="username" name="username" autocorrect="off" autocapitalize="off" autofocus></td>
+                    </tr>
+                    <tr>
+                        <!-- <td class="infoline_column infoline_left">Password:</td> -->
+                        <td class="infoline_column" style="padding-left: 0;text-align: center;">
+                            <label style="width: 100px;" data-i18n="login.password"></label>
+                            <input type="password" size="20" maxlength="20" id="password" name="password" autocorrect="off" autocapitalize="off"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="submit_section">
+                <button class="submit_button" type="submit">
+                <span data-i18n="login.login"></span>
+            </div>
+        </form>
+        </div>
+    </section>
+</div>
+
+        <footer>
+            <% include ./partials/footer.html %>
+        </footer>
+        <script type="text/javascript">
+            <% if(typeof(errorMessage) !== 'undefined') { %>
+            alert("<%= errorMessage %>");
+            <% } %>
+
+            function focus() {
+                $('#username').focus();
+            }
+            $(focus);
+        </script>
+
+</body>
+
+</html>

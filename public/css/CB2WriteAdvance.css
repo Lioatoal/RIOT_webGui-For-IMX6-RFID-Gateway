@@ -1,0 +1,105 @@
+#backButton i {
+  font-size:40px;
+  cursor: pointer;
+  text-align: center;
+  border: 5px #eee solid;
+  border-radius: 50%;
+  margin:5px;
+}
+
+#transButton button{
+    width: 100%;
+    margin-top:10px;
+}
+
+label {
+  font-size:20px;
+}
+
+input[type="text"] {
+  width:100%;
+  height: 34px;
+}
+
+input[type="radio"] {
+  height:24px;
+}
+
+input[type="number"] {
+  width:100%;
+  height:34px;
+}
+
+textarea {
+  width:100%;
+}
+
+.R1 {
+}
+
+.R2 {
+  background-color:#eee;
+  padding:10px 0 10px 0;
+  margin:10px -15px 10px -15px;
+}
+
+.R3 {
+}
+
+.R3C1 {
+  background-color:#eee;
+  padding:10px 0 10px 0;
+  border:5px #ffffff solid;
+}
+
+.R3C2 {
+  background-color:#eee;
+  padding:10px 0 10px 0;
+  border:5px #ffffff solid;
+}
+
+.R4 {
+  background-color:#eee;
+  padding:10px 0 10px 0;
+  border:5px #fff solid;
+  margin:10px -15px 10px -15px;
+}
+
+.R4C1 {
+}
+
+.R4C2 {
+  height:180px;
+  border-top:5px #ffffff solid;
+}
+
+.R4C3 {
+  height:180px;
+  border-top:5px #ffffff solid;
+}
+
+.R4C4 {
+  height:180px;
+  border-top:5px #ffffff solid;
+}
+
+.R5 {
+  background-color:#eee;
+  padding:10px 0 10px 0;
+  border:5px #ffffff solid;
+}
+
+.R5C2 {
+  padding:15px;
+}
+
+@media screen and (min-width: 992px) {
+    .topDiv{
+        padding-top:120px;
+    }
+}
+@media screen and (max-width: 992px) {
+    .topDiv{
+        padding-top:70px;
+    }
+}

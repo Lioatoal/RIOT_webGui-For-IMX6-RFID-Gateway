@@ -1,0 +1,86 @@
+/* Mod by Roy for change inventroy table margin, 2018-03-07 */
+@media screen and (min-width: 1920px) {
+    .rfidTable {
+      position:fixed;
+      left:5%;
+      right:5%;
+      z-index:99998;
+      top: 10%;
+      bottom:28%;
+      overflow: auto;
+    }
+}
+@media screen and (max-width: 1920px) {
+    .rfidTable {
+      position:fixed;
+      left:5%;
+      right:5%;
+      z-index:99998;
+      top: 13%;
+      bottom:28%;
+      overflow: auto;
+    }
+}
+
+/* @media screen and (min-width: 1200px) {
+    .rfidTable {
+      position:fixed;
+      left:5%;
+      right:5%;
+      z-index:99998;
+      top: 16%;
+      bottom:28%;
+      overflow: auto;
+    }
+} */
+
+@media screen and (max-width: 1200px) {
+    .rfidTable {
+      position:fixed;
+      left:5%;
+      right:5%;
+      z-index:99998;
+      top: 20%;
+      bottom:25%;
+      overflow: auto;
+    }
+}
+@media screen and (max-width: 992px) {
+    .rfidTable {
+      position:fixed;
+      left:5%;
+      right:5%;
+      z-index:99998;
+      /* top: 13%; */
+      top: 9%;
+      bottom:40%;
+      overflow: auto;
+    }
+}
+@media screen and (max-width: 768px) {
+    .rfidTable {
+      position:fixed;
+      left:5%;
+      right:5%;
+      z-index:99998;
+      /* top: 10%; */
+      top: 9%;
+      bottom:30%;
+      overflow: auto;
+    }
+}
+/* End by Roy for change inventroy table margin, 2018-03-07 */
+
+#footer {
+  background-color:#fff;
+  position:fixed;
+  left:5%;
+  right:5%;
+  z-index:99998;
+  bottom:0;
+}
+
+.gpsHeader {
+    background-color: #f5f5f5;
+    color: black;
+}

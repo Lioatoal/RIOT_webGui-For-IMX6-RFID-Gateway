@@ -1,0 +1,72 @@
+<!-- MTI CONFIDENTIAL INFORMATION  -->
+<!DOCTYPE html>
+<!-- views/inventory.html -->
+<html>
+
+<head>
+    <% include ../partials/head.html %>
+    <link rel="stylesheet" type="text/css" href="public/css/CB2Write.css">
+</head>
+
+<body>
+    <div id="header">
+        <% include ../partials/header.html %>
+    </div>
+    <div class="container topDiv">
+        <div class="row toolBar">
+            <div class="col-md-2 col-sm-2 col-xs-4">
+                <button id="btn_transtag" class="btn btn-lg btn-default" type="button">
+                    <strong>ASCII</strong>
+                </button>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-4">
+                <button id="btn_gettag" class="btn btn-lg btn-default" type="button"><strong>Get</strong></button>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-4">
+                <button id="btn_set" class="btn btn-lg btn-default" type="button"><strong>Set</strong></button>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-4">
+                <button id="btn_clear" class="btn btn-lg btn-default" type="button"><strong>Clear</strong></button>
+            </div>
+            <div class="col-md-2 col-md-offset-2 col-sm-4 col-xs-8 ">
+                <input id="btn_getInterval" class="input-lg" type="number" min="1" max="180" placeholder="search time(s)">
+            </div>
+        </div>
+        <div class="row">
+            <table id="tbl_data_grid" class="table table-bordered rwd-table">
+                <thead>
+                    <tr class="table-light">
+                        <th>
+                        </th>
+                        <th>EPC</th>
+                        <th>Alert light</th>
+                        <th>Battery</th>
+                        <th>Antenna</th>
+                        <th>Interval (1s - 180s)</th>
+                    </tr>
+                </thead>
+                <tbody id="tbl_cb2_topic">
+                </tbody>
+            </table>
+    </div>
+    <div class="c table_page row">
+        <div id="barcon" name="barcon"></div>
+    </div>
+    <hr class="no-grid-gutter-h grid-gutter-margin-b">
+    <div id="footer">
+        <footer>
+        <p class="footer section infoline_center">Copyright © 2017-2018 MTI, Inc. All Rights Reserved&nbsp;&nbsp;&nbsp;</p>
+        </footer>
+    </div>
+    <script type="text/javascript" src='/views/CB2Write/JSCB2Write.js'></script>
+    <script>
+        var keepCB2Data = <%- JSON.stringify(rowData) %>;
+        if (keepCB2Data) {
+            cb2TagEPCcount = keepCB2Data.length;
+            cb2TagEPC = keepCB2Data;
+            goToPage(firstPage, rowSizeValue);
+        }
+    </script>
+</body>
+
+</html>

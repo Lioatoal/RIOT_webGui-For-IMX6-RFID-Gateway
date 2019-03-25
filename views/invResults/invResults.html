@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ../partials/head.html %>
+    <link rel="stylesheet" type="text/css" href="public/css/invResults.css">
+	<!-- Mod by Roy for move JS code of inventory page to js file, 2018-08-07. -->
+    <script type="text/javascript">
+		//Del by Roy for remove the data getting method that geting from RFID/GPS consolidate table, 2018-09-14.
+        // var invTimer = JSON.stringify(invTimer);
+        // var gpsData = JSON.stringify(gpsResults);
+        // var gpsTimer= JSON.stringify(gpsTimer);
+		//End by Roy for remove the data getting method that geting from RFID/GPS consolidate table, 2018-09-14.
+        var beepConf = <%- JSON.stringify(beepConf)%> //Add by Roy for add beep function, 2018-12-25.
+    </script>
+	<!-- End by Roy for move JS code of inventory page to js file, 2018-08-07. -->
+</head>
+
+<body>
+    <div>
+        <div id="header">
+            <% include ../partials/header.html %>
+        </div>
+    </div>
+    <div class="topDiv">
+        <div class="container">
+            <div class="rfidTable">
+                <div class="table-responsive">
+                    <table id="resTable" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th data-i18n="inventory.epc"></th>
+                                <th data-i18n="inventory.tid"></th>
+                                <th data-i18n="inventory.readCount"></th>
+                                <th data-i18n="inventory.antenna"></th>
+                                <th data-i18n="inventory.avgRssi"></th>
+                                <th data-i18n="inventory.avgTemp"></th>
+                                <th data-i18n="inventory.dataTime"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="rfidTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr class="gpsHeader">
+                        <th data-i18n="inventory.latitude"></th>
+                        <th data-i18n="inventory.longitude"></th>
+                        <th data-i18n="inventory.altitude"></th>
+                        <th data-i18n="inventory.datetime"></th>
+                        <th data-i18n="inventory.heading"></th>
+                        <th data-i18n="inventory.speed"></th>
+                        <th data-i18n="inventory.fix"></th>
+						<th data-i18n="inventory.quality"></th> <!-- Add by Roy for add quality field for GPS table, 2018-09-27 -->
+                        <th data-i18n="inventory.hdop"></th>
+                        <th data-i18n="inventory.satellites"></th>
+                    </tr>
+                </thead>
+                <tbody id="gpsTableBody">
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <button id="start" class="btn btn-default" type="button" style="font-size:20px;"><strong data-i18n="inventory.start"></strong> </button>
+                <button id="stop" class="btn btn-default" type="button" style="font-size:20px;"><strong data-i18n="inventory.stop"></strong> </button>
+                <button id="clear" class="btn btn-default" type="button" style="font-size:20px;"><strong data-i18n="inventory.clear"></strong> </button>
+                <button id="trans" class="btn btn-default" type="button" style="font-size:20px;"><strong data-i18n="inventory.ascii"></strong> </button>
+            </div>
+        </div>
+        <% include ../partials/footer.html %>
+        <!-- <footer>
+        <p class="footer section infoline_center">Copyright © 2017-2018 MTI, Inc. All Rights Reserved&nbsp;&nbsp;&nbsp;</p>
+        </footer> -->
+    </div>
+	<!-- Mod by Roy for move JS code to js file, 2018-08-. -->
+    <script type="text/javascript" src="public/js/beep/beep.js"></script> <!-- Add by Roy for add beep function, 2018-12-25.-->
+    <script type="text/javascript" src='/views/invResults/JSInvResults.js'></script>
+    <!-- <script type="text/javascript">
+		// Mod by Roy for stop inventory when click clear button, 2018-03-07.
+        // $( function() {
+        var run = 0;
+		// Mod by Roy for change interval of inventory by output thread sleep timer, 2018-03-07.
+        var invTimer = JSON.stringify(invTimer);
+        var gpsData = JSON.stringify(gpsResults);
+        var gpsTimer= JSON.stringify(gpsTimer);
+        //var lastInvNum;
+
+        // getInvData(invData);
+        getGpsData(gpsData);
+        transfer(true);
+
+        socket.emit('updateInvRUN',function (dbData) {
+            run = dbData;
+            updateInvDB();
+            updateGPSDB();
+        });
+
+        $("#start").click(function () {
+            run = 1;
+            transfer(false);
+            $.post('/invResults',{run: run}, function (result) {
+                if (result.error != "") {
+                    alert(result.error);
+                }
+            });
+        });
+        $("#stop").click(function () {
+            run = 0;
+            transfer(true);
+            $.post('/invResults',{run: run}, function (result) {
+                if (result.error != "") {
+                    alert(result.error);
+                }
+            });
+        });
+        $("#clear").click(function () {
+            $("#stop").click();
+            $("#rfidTableBody").html("");
+            run = -1;
+            $.post('/invResults',{run: run}, function (result) {
+                if (result.error != "") {
+                    alert(result.error);
+                }
+            });
+        });
+        function stopRFID() {
+            run = 0;
+            transfer(true);
+            $.post('/invResults',{run: run}, function (result) {
+                if (result.error != "") {
+                    alert(result.error);
+                }
+            });
+        }
+        function getInvData(dbData) {
+			//Mod by Roy for show error log if get method return error, 2018-03-28.
+            //if (dbData.error != null) {
+                // alert(dbData.error);
+            //} else {
+            if (dbData.length != 0) {
+                textInvData(dbData);
+            }
+            //}
+        }
+        function getGpsData(dbData) {
+			//if (dbData.error != null) {
+                // alert(dbData.error);
+            //} else {
+            if (dbData.length != 0) {
+            	textGpsData(dbData);
+            }
+            //}
+        }
+
+        function updateInvDB() {
+            //Mod by Roy for get a interval inventory result, 2018-02-22.
+            // var getTime = new Date().toISOString().split('.');
+        	// var currentTime = getTime[0];
+            if (invTimer.length == 0) {
+                alert('Get inventory Timer failed');
+                return;
+            }
+            if (run == true) {
+                // socket.emit('updateInvData', currentTime ,function (dbData) {
+                socket.emit('updateInvData', invTimer, function (dbData) {
+			//End by Roy for get a interval inventory result, 2018-02-22.
+                    getInvData(dbData);
+                });
+                transfer(false);
+            }
+            setTimeout(updateInvDB, invTimer[0]*1000);
+			// End by Roy for change interval of inventory by output thread sleep timer, 2018-03-01.
+        }
+        function updateGPSDB(){
+            if (gpsTimer.length == 0) {
+                alert('Get GPS Timer failed');
+                return;
+            }
+			//End by Roy for show error log if get method return error, 2018-03-28.
+			//Mod by Roy for get lastest GPS data, 2018-02-22.
+            // var getTime = new Date().toISOString().split('.');
+        	// var currentTime = getTime[0];
+            // socket.emit('updateGpsData', currentTime,  function (dbData) {
+            socket.emit('updateGpsData', function (dbData) {
+			//End by Roy for get lastest GPS data, 2018-02-22.
+                getGpsData(dbData);
+            });
+            setTimeout(updateGPSDB, gpsTimer[0]*1000);
+        }
+
+        function textInvData(data) {
+            var text = "";
+            for (var i = 0; i < data.length; i++) {
+                text +=
+                "<tr>" +
+                    "<td id=\"epc_"+ i +"\">" +
+                        //"<a href=\"/cb2Advance?" + data[i].EPC + "\">" +
+						//Mod by Roy for fix the EPC display abnormal bug in Advance tag page, 2018-03-28.
+						//"<a href=\"/cb2Advance?" + data[i].EPC + "\" onclick=\"stopRFID()\" >" +
+						"<a href=\"/cb2Advance?EPC=" + data[i].EPC + "\" onclick=\"stopRFID()\" >" +
+						//Mod by Roy for fix the EPC display abnormal bug in Advance tag page, 2018-03-28
+						// End by Roy for stop inventory when click clear button, 2018-03-07.
+                            data[i].EPC +
+                        "</a>" +
+                    "<td>" + data[i].TID + "</td>" +
+                    "<td>" + data[i].ReadCount + "</td>" +
+                    "<td>" + data[i].pAnt + "</td>" +
+                    "<td>" + data[i].avgRssi + "</td>" +
+                    "<td>" + data[i].avgsTemp + "</td>" +
+                    "<td>" + data[i].lastSeen + "</td>" +
+                "</tr>";
+            }
+            $("#rfidTableBody").html(text);
+        }
+        function textGpsData(data) {
+            var text = "";
+            text +=
+            "<tr>" +
+                "<td>" + data.Latitude + "</td>" +
+                "<td>" + data.Longitude + "</td>" +
+                "<td>" + data.Altitude + "</td>" +
+                "<td>" + data.DateTime + "</td>" +
+                "<td>" + data.Heading + "</td>" +
+                "<td>" + data.Speed + "</td>" +
+                "<td>" + data.Fix + "</td>" +
+                "<td>" + data.HDOP + "</td>" +
+                "<td>" + data.Satellites + "</td>" +
+            "</tr>";
+            $("#gpsTableBody").html(text);
+        }
+
+        function transfer(flag) {
+            if (flag) {
+                $("#trans").attr("disabled", false);
+                $("#trans").click(function () {
+                    var transData="", epcLen = rfidTableBody.rows.length;
+                    if (epcLen == 0) {
+                        return;
+                    }
+                    if ($('#trans strong').text() == "ASCII") {
+                        for (var i = 0; i < epcLen; i++) {
+                            var epc = $("#epc_"+i).text();
+                            for (var j = 0; j < epc.length; j++) {
+                                transData += epc.charCodeAt(j).toString(16);
+                            }
+                            transData = transData.toUpperCase();//轉大寫
+                            $("#epc_"+i + " a").text(transData);
+                            transData="";
+                        }
+                        $('#trans strong').text("HEX");
+                    } else if ($('#trans strong').text() == "HEX") {
+                        for (var i = 0; i < epcLen; i++) {
+                            var epc = $("#epc_"+i).text();
+                            for (var j = 0; j < epc.length; j+=2) {
+                                transData += String.fromCharCode(parseInt(epc.substr(j,2),16));
+                            }
+                            $("#epc_"+i + " a").text(transData);
+                            transData="";
+                        }
+                        $('#trans strong').text("ASCII");
+                    }
+                });
+            } else {
+                $("#trans").attr("disabled", true);
+                $("#trans").unbind("click");
+            }
+        }
+    </script> -->
+	<!-- End by Roy for move JS code to js file, 2018-08-07. -->
+</body>
+</html>

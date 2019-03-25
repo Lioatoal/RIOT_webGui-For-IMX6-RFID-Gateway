@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ../partials/head.html %>
+    <style media="screen">
+        @media screen and (min-width: 992px) {
+            .topDiv{
+                padding-top:160px;
+            }
+        }
+        @media screen and (max-width: 992px) {
+            .topDiv{
+                padding-top:70px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="header">
+            <% include ../partials/header.html %>
+        </div>
+    </div>
+
+    <div class="topDiv">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3><strong><span style="text-decoration: underline;" data-i18n="configuration.wifi"></span></strong></h3></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4 data-i18n="configuration.ssid"></h4></div>
+                        <div class="col-md-8">
+                            <input id="wifiSSID" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4 data-i18n="configuration.password"></h4></div>
+                        <div class="col-md-8">
+                            <input id="wifiPassword" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4 data-i18n="configuration.wifiSecurity"></h4>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="wifiSecurity" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3><strong><span style="text-decoration: underline;" data-i18n="configuration.aws"></span></strong></h3></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4 data-i18n="configuration.clientID"></h4></div>
+                        <div class="col-md-8">
+                            <input id="awsClientID" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <h4 data-i18n="configuration.rootCAFile"></h4></div>
+                        <div class="col-md-5 col-sm-8 col-xs-10">
+                            <label>
+                                <input id="awsRootCAFile" type="file" style="margin-top:5px;margin-bottom:4px;width:100%;">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <h4 data-i18n="configuration.deviceCert"></h4></div>
+                        <div class="col-md-5 col-sm-8 col-xs-10">
+                            <label>
+                                <input id="awsDeviceCert" type="file" style="margin-top:5px;margin-bottom:4px;width:100%">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <h4 data-i18n="configuration.privateKey"></h4></div>
+                        <div class="col-md-5 col-sm-8 col-xs-10">
+                            <label>
+                                <input  id="awsPrivateKey" type="file" style="margin-top:5px;margin-bottom:4px;width:100%">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4 data-i18n="configuration.keepAlive"></h4></div>
+                        <div class="col-md-8">
+                            <select id="awsKeepAliveInterval" style="margin-top:7px;margin-bottom:7px;">
+                                <optgroup label="Keep Alive">
+                                    <option value="12" selected="">30</option>
+                                    <option value="13">60</option>
+                                    <option value="14">120</option>
+                                    <option value="14">180</option>
+                                </optgroup>
+                            </select>
+                            <label data-i18n="configuration.seconds"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3><strong><span style="text-decoration: underline;"  data-i18n="configuration.bluetooth"></span></strong> </h3></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4 data-i18n="configuration.mac"></h4></div>
+                        <div class="col-md-6">
+                            <input id="bluetoothMAC" type="text" style="margin-top:6px;margin-bottom:6px;width:80%" >
+                        </div>
+                    </div>
+                    <!-- Add by Wayne for adding pairing code of BT, 2018-12-21-->
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4 data-i18n="configuration.pairingCode"></h4></div>
+                        <div class="col-md-6">
+                            <input id="btpaircode" type="text" style="margin-top:6px;margin-bottom:6px;width:80%" >
+                        </div>
+                    </div>
+                    <!-- End by Wayne for adding pairing code of BT, 2018-12-21-->
+				</div>
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3><strong><span style="text-decoration: underline;" data-i18n="configuration.tcpUdp"></span></strong> </h3></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4 data-i18n="configuration.ipAddress"></h4></div>
+                        <div class="col-md-8">
+                            <input id="tcpudpIP" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4 data-i18n="configuration.port"></h4></div>
+                        <div class="col-md-8">
+                            <input id="tcpudpPort" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3><strong><span style="text-decoration: underline;" data-i18n="configuration.httpPost"></span></strong></h3></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4 data-i18n="configuration.url"></h4></div>
+                        <div class="col-md-6">
+                            <input id="httppostURL" type="text" style="margin-top:6px;margin-bottom:6px;width:100%">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4 data-i18n="configuration.port"></h4></div>
+                        <div class="col-md-8">
+                            <input id="httppostPort" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4 data-i18n="configuration.fields"></h4></div>
+                        <div class="col-md-8">
+                            <input id="httppostFields" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4 data-i18n="configuration.heartBeat"></h4></div>
+                        <div class="col-md-8">
+                            <select id="httppostHeartBeat" style="margin-top:7px;margin-bottom:7px;">
+                                <optgroup label="Heart Beat">
+                                    <option value="12" selected="">30</option>
+                                    <option value="13">60</option>
+                                    <option value="14">120</option>
+                                    <option value="14">180</option>
+                                </optgroup>
+                            </select>
+                            <label data-i18n="configuration.seconds"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-12 h3">
+                            <strong style="text-decoration: underline;" data-i18n="configuration.language"></strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4 data-i18n="configuration.currentLang"></h4>
+                        </div>
+                        <div class="col-md-8">
+                            <label>
+                                <select id="lang" class="form-control" style="text-align-last: center;">
+                                    <option selected  value="en">English</option>
+                                    <option  value="zh-CN">简体中文</option>
+                                    <option value="zh-TW">繁體中文</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+				<!-- Add by Roy for add beep function, 2018-12-25.-->
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-12 h3">
+                            <strong style="text-decoration: underline;" data-i18n="configuration.announce"></strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 checkbox h4">
+                            <label>
+                                <input name="annoBeep"  type="checkbox" value="true"/>
+                                <span data-i18n="configuration.beep"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+				<!-- End by Roy for add beep function, 2018-12-25.-->
+            </div>
+            <div class="row">
+                <div class="col-md-offset-5 col-md-2 col-sm-offset-4 col-sm-4" style="padding-top:10px">
+                    <button id="set" class="btn btn-default" type="button" style="width:100%;font-size:18px;"><strong data-i18n="configuration.submit"></strong></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="no-grid-gutter-h grid-gutter-margin-b">
+    <div id="footer">
+        <% include ../partials/footer.html %>
+        <!-- <footer>
+        <p class="footer section infoline_center">Copyright © 2017-2018 MTI, Inc. All Rights Reserved&nbsp;&nbsp;&nbsp;</p>
+        </footer> -->
+    </div>
+
+    <script type="text/javascript">
+        var dbConfigData =  <%- JSON.stringify(configuration) %>;
+        var postData;
+        var FR = new FileReader();
+
+        $("#set").click(function () {
+            var configSet = {
+              //Wifi
+              //WiFiHostname: $("#wifiHostname").val(),
+              WiFiSSID: $("#wifiSSID").val(),
+              //WiFiUsername: $("#wifiUsername").val(),
+              WiFiPassword: $("#wifiPassword").val(),
+
+              WiFiSecurity: $("#wifiSecurity").val(),
+              //AWS
+              //AWSClientID: $("#awsClientID").val(),
+
+              //AWSKeepAliveInterval: $("#awsKeepAliveInterval").val(),
+
+              //Bluetooth
+              BlueToothMAC: $("#bluetoothMAC").val(),
+              Btpaircode: $("#btpaircode").val(), //Add by Wayne for adding pairing code of BT, 2018-12-21
+
+              //TCP/UDP
+              TCP_UDP_IP: $("#tcpudpIP").val(),
+              TCP_UDP_Port: $("#tcpudpPort").val(),
+
+              //Http-post
+              HttpPostURL: $("#httppostURL").val(),
+              HttpPostPort: $("#httppostPort").val(),
+              //HttpPostFields: $("#httppostFields").val(),
+              //HttpPostHeartBeat: $("#httppostHeartBeat").val(),
+              Language: $("#lang").val(), //Add by Roy for add language package, 2019-02-15.
+              AnnounceBeep: $('input[name=annoBeep]:checked').val()?1:0 //Add by Roy for add beep function, 2018-12-25.
+            }
+
+            postData = {
+                configuration: configSet,
+                base: FR.result
+            };
+
+            var upload = new FormData();
+            upload.append('Auth', $("#awsRootCAFile")[0].files[0]);
+            upload.append('Auth',$("#awsDeviceCert")[0].files[0]);
+            upload.append('Auth', $("#awsPrivateKey")[0].files[0]);
+
+            $.ajax({
+                url: '/configurationAuth',
+                type: 'POST',
+                cache: false,
+                data: upload,
+                processData: false,
+                contentType: false
+            });
+
+            $.post('/configuration',{postData: JSON.stringify(postData)}, function(result) {
+                location.reload();
+            });
+        });
+        $("#awsRootCAFile").change(function () {
+            FR.readAsDataURL(this.files[0]);
+        })
+        getData(dbConfigData);
+
+        function getData(ConfigData) {
+		//Add by Roy for show error log if get method return error, 2018-03-28.
+                if (getCheckForm()) {
+                    return;
+                }
+                //Wifi
+                //$("#wifiHostname").val(ConfigData[0].WiFi_Hostname);
+                $("#wifiSSID").val(ConfigData[0].WiFi_SSID);
+                //$("#wifiUsername").val(ConfigData[0].WiFi_Username);
+                $("#wifiPassword").val(ConfigData[0].WiFi_Password);
+
+                $("#wifiSecurity").val(ConfigData[0].WiFi_Security);
+
+                //AWS
+                //$("#awsClientID").val(ConfigData[0].AWS_Client_ID);
+                //$("#awsRootCAFile").val(ConfigData[0].AWS_Root_CA_File);
+                //$("#awsDeviceCert").val(ConfigData[0].AWS_Device_Cert);
+                //$("#awsPrivateKey").val(ConfigData[0].AWS_Private_Key);
+                //$("#awsKeepAliveInterval").val(ConfigData[0].AWS_Keep_Alive_Interval);
+
+                //Bluetooth
+                $("#bluetoothMAC").val(ConfigData[0].BluetoothMAC);
+                $("#btpaircode").val(ConfigData[0].BluetoothPair); //Add by Wayne for adding pairing code of BT, 2018-12-21
+
+                //TCP/UDP
+                $("#tcpudpIP").val(ConfigData[0].TCP_UDP_HOST_IP);
+                $("#tcpudpPort").val(ConfigData[0].TCP_UDP_HOST_PORT);
+
+                //Http-post
+                $("#httppostURL").val(ConfigData[0].HTTP_POST_URL);
+                $("#httppostPort").val(ConfigData[0].HTTP_POST_PORT);
+                //$("#httppostFields").val(ConfigData[0].HTTP_POST_Fields);
+                //$("#httppostHeartBeat").val(ConfigData[0].HTTP_POST_HeartBeat);
+                //Add by Roy for add beep function, 2018-12-25.
+                if (ConfigData[0].Beep) {
+                    $("input[name=annoBeep]")[0].checked = true;
+                } else {
+                    $("input[name=annoBeep]")[0].checked = false;
+                }
+				//End by Roy for add beep function, 2018-12-25.
+                $("#lang").val(ConfigData[0].Language); //Add by Roy for add language package, 2019-02-15.
+        };
+        function getCheckForm() {
+            if (dbConfigData.length == 0) {
+                alert('get Configuration failed!');
+                return true;
+            }
+            return false;
+        }
+		//End by Roy for show error log if get method return error, 2018-03-28.
+
+
+
+    </script>
+</body>
+</html>

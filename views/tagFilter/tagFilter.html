@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ../partials/head.html %>
+    <style type="text/CSS">
+        span {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div id="header">
+            <% include ../partials/header.html %>
+        </div>
+    </div>
+
+    <div class="hidden-sm hidden-xs" style="padding-top:160px">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <sapn><strong data-i18n="tagFilter.wildCard"></strong></sapn></div>
+            </div>
+            <div class="row" style="background-color:#f1f1f1;">
+                <div class="col-md-2" style="margin-left: 4%;">
+                    <div class="row">
+                        <div class="col-md-7 col-md-offset-2">
+                            <h4 class="text-center" data-i18n="tagFilter.select"></h4></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-4" style="margin-top:8px;margin-bottom:8px;">
+                            <input id="select_0" type="checkbox">
+                        </div>
+                        <div class="col-md-4 col-md-offset-4" style="margin-top:8px;margin-bottom:8px;">
+                            <input id="select_1" type="checkbox">
+                        </div>
+                        <div class="col-md-4 col-md-offset-4" style="margin-top:8px;margin-bottom:8px;">
+                            <input id="select_2" type="checkbox">
+                        </div>
+                        <div class="col-md-4 col-md-offset-4" style="margin-top:8px;margin-bottom:8px;">
+                            <input id="select_3" type="checkbox">
+                        </div>
+                        <div class="col-md-4 col-md-offset-4" style="margin-top:8px;margin-bottom:8px;">
+                            <input id="select_4" type="checkbox">
+                        </div>
+                        <div class="col-md-4 col-md-offset-4" style="margin-top:8px;margin-bottom:8px;">
+                            <input id="select_5" type="checkbox">
+                        </div>
+                        <div class="col-md-4 col-md-offset-4" style="margin-top:8px;margin-bottom:8px;">
+                            <input id="select_6" type="checkbox">
+                        </div>
+                        <div class="col-md-4 col-md-offset-4" style="margin-top:8px;margin-bottom:8px;">
+                            <input id="select_7" type="checkbox">
+                        </div>
+                        <div class="col-md-4 col-md-offset-4" style="margin-top:8px;margin-bottom:8px;">
+                            <input id="select_8" type="checkbox">
+                        </div>
+                        <div class="col-md-4 col-md-offset-4" style="margin-top:8px;margin-bottom:8px;">
+                            <input id="select_9" type="checkbox">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 ">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4 data-i18n="tagFilter.sessionID"></h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input id="sessionID_0" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="sessionID_1" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="sessionID_2" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="sessionID_3" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="sessionID_4" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="sessionID_5" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="sessionID_6" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="sessionID_7" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="sessionID_8" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="sessionID_9" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4 data-i18n="tagFilter.epcFilter"></h4></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input id="EPCFilter_0" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="EPCFilter_1" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="EPCFilter_2" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="EPCFilter_3" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="EPCFilter_4" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="EPCFilter_5" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="EPCFilter_6" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="EPCFilter_7" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="EPCFilter_8" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="EPCFilter_9" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4 data-i18n="tagFilter.tidFilter"></h4></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input id="TIDFilter_0" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="TIDFilter_1" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="TIDFilter_2" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="TIDFilter_3" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="TIDFilter_4" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="TIDFilter_5" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="TIDFilter_6" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="TIDFilter_7" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="TIDFilter_8" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="TIDFilter_9" type="text" style="margin-top:6px;margin-bottom:6px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hidden-md hidden-lg" style="padding-top:70px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"><span><strong>Wild card character ==%</strong></span></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="checkbox">
+                        <label>
+                            <input id="xs-select" type="checkbox" data-i18n="tagFilter.select"/>
+                            <span data-i18n="tagFilter.select"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <select id="xs-selectOption" style="height:30px;margin-top:7px;margin-bottom:7px;width:100%;">
+                        <option value="0" selected>1</option>
+                        <option value="1">2</option>
+                        <option value="2">3</option>
+                        <option value="3">4</option>
+                        <option value="4">5</option>
+                        <option value="5">6</option>
+                        <option value="6">7</option>
+                        <option value="7">8</option>
+                        <option value="8">9</option>
+                        <option value="9">10</option>
+                        <option value="10">11</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4" style="margin-top:11px;margin-bottom:10px;"><span data-i18n="tagFilter.sessionID"></span></div>
+                <div class="col-xs-6" style="margin-top:9px;margin-bottom:8px;">
+                    <input id="xs-sessionID" type="text" style="width:100%;" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4" style="margin-top:11px;margin-bottom:10px;"><span data-i18n="tagFilter.epcFilter"></span></div>
+                <div class="col-xs-6" style="margin-top:9px;margin-bottom:8px;">
+                    <input id="xs-EPCFilter" type="text" style="width:100%;" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4" style="margin-top:11px;margin-bottom:10px;"><span data-i18n="tagFilter.tidFilter"></span></div>
+                <div class="col-xs-6" style="margin-top:9px;margin-bottom:8px;">
+                    <input id="xs-TIDFilter" type="text" style="width:100%;" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-md-offset-5 col-xs-4 col-xs-offset-4" style="padding-top:10px">
+                <button id="submit" class="btn btn-default" type="button" style="width:100%;">
+                    <span><strong data-i18n="tagFilter.submit"></strong></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <hr class="no-grid-gutter-h grid-gutter-margin-b">
+    <div id="footer">
+        <% include ../partials/footer.html %>
+        <!-- <footer>
+        <p class="footer section infoline_center">Copyright © 2017-2018 MTI, Inc. All Rights Reserved&nbsp;&nbsp;&nbsp;</p>
+        </footer> -->
+    </div>
+    <script type="text/javascript">
+        var dbtagFilter = <%- JSON.stringify(tagFilter) %>;
+    </script>
+    <script type="text/javascript" src='/views/tagFilter/JSTagFilter.js'></script>
+</body>
+</html>
